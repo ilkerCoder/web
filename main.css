@@ -170,6 +170,40 @@ ul.navbar-nav li:hover {
     font-size: 2.7em;
   }
 }
+/* main.css */
+
+/* Küçük ekranlar için ayarlar */
+@media (max-width: 767.98px) {
+  body {
+    overflow: auto; /* Kaydırma çubuğunu etkinleştir */
+  }
+  #drag-container {
+    margin-top: 9% !important;
+  }
+  #drag-container,
+  #spin-container {
+    width: 80%; /* Container genişliğini azalt */
+    height: 80%; /* Container yüksekliğini azalt */
+    -webkit-transform: rotateX(-20deg); /* Yatay dönüş açısını ayarla */
+    transform: rotateX(-20deg); /* Yatay dönüş açısını ayarla */
+  }
+
+  #drag-container .yer {
+    left: 50% !important; /* Yer logosunun yatay konumunu ayarla */
+    width: 50vw; /* Yer logosunun genişliğini ayarla */
+  }
+
+  #ground {
+    width: 600px; /* Zemin genişliğini azalt */
+    height: 600px; /* Zemin yüksekliğini azalt */
+  }
+
+  #drag-container img,
+  #drag-container video {
+    width: 100%; /* İmgelerin ve videoların genişliğini %100 yap */
+    height: auto; /* İmgelerin ve videoların yüksekliğini otomatik olarak ayarla */
+  }
+}
 
 @keyframes fadeInDown {
   from {
