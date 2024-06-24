@@ -13,15 +13,13 @@ body {
   background-color: transparent;
 }
 
-.navbar {
-  width: 100%;
-}
-
 #app {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  width: 100%;
+  padding-top: 60px; /* Navbar yüksekliği kadar boşluk bırak */
 }
 
 .navbar-collapse {
@@ -77,10 +75,25 @@ ul.navbar-nav li:hover {
   backdrop-filter: blur(10px);
   background-color: #111;
   padding: 0 20px;
+  width: 100%;
+  z-index: 10000;
+  position: fixed;
+  top: 0;
 }
 
 .navbar-nav .nav-link {
   color: #fff !important;
+}
+
+.navbar-toggler:hover {
+  opacity: 0.6;
+  transform: scale(1.2);
+  transition: transform 0.3s ease, opacity 0.3s ease, border 0.3s ease,
+    box-shadow 0.3s ease;
+  background-color: #dc0a0a;
+}
+.navbar-toggler:active {
+  transform: scale(0.7);
 }
 
 .navbar-toggler-icon {
@@ -91,6 +104,10 @@ ul.navbar-nav li:hover {
   .navbar-collapse {
     text-align: center;
     margin-left: 0;
+  }
+  ul.navbar-nav li {
+    border-bottom: 2px solid black;
+    animation: soldanSaga, 2 ease;
   }
 
   .navbar-nav {
@@ -107,5 +124,42 @@ ul.navbar-nav li:hover {
   .navbar-nav .nav-link {
     padding: 0.5rem 0;
     margin-right: 0;
+  }
+
+  .collapse:not(.show) {
+    display: none !important; /* Navbar kapandığında gizli tut */
+  }
+
+  .collapse.show {
+    display: block; /* Navbar açıldığında görünür yap */
+    position: absolute;
+    width: 100%;
+    z-index: 999; /* İçeriklerin üstünde olacak şekilde ayarla */
+    top: 100%;
+    backdrop-filter: blur(10px); /* Bulanıklık efekti */
+    left: 0;
+    background-color: rgba(59, 52, 52, 0.3);
+    animation: fadeInDown 1.5s ease; /* Animasyon ekle */
+  }
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px); /* Yukarıdan gelsin */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* Yerine otursun */
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateX(-100px); /* Yukarıdan gelsin */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0); /* Yerine otursun */
   }
 }

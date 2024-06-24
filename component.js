@@ -14,7 +14,7 @@ function create3DSlider(container) {
     </div>
   `;
 
-  var radius = 350; // how big of the radius
+  var radius = 380; // how big of the radius
   var autoRotate = true; // auto rotate or not
   var rotateSpeed = -60; // unit: seconds/360 degrees
   var imgWidth = 350; // width of images (unit: px)
@@ -119,22 +119,6 @@ function create3DSlider(container) {
     return false;
   };
 
-  // Navbar harici bir yere tıklanırsa toggle kapansın
-  document.addEventListener("click", function (event) {
-    var target = event.target;
-
-    if (
-      !target.closest(".navbar-collapse") &&
-      !target.closest(".navbar-toggler")
-    ) {
-      var navbarCollapse = document.querySelector(".navbar-collapse");
-      if (navbarCollapse.classList.contains("show")) {
-        var navbarToggler = document.querySelector(".navbar-toggler");
-        navbarToggler.click();
-      }
-    }
-  });
-
   document.onmousewheel = function (e) {
     e = e || window.event;
     var d = e.wheelDelta / 10 || -e.detail;
@@ -144,3 +128,18 @@ function create3DSlider(container) {
     init(1);
   };
 }
+// Navbar harici bir yere tıklanırsa toggle kapansın
+document.addEventListener("click", function (event) {
+  var target = event.target;
+
+  if (
+    !target.closest(".navbar-collapse") &&
+    !target.closest(".navbar-toggler")
+  ) {
+    var navbarCollapse = document.querySelector(".navbar-collapse");
+    if (navbarCollapse.classList.contains("show")) {
+      var navbarToggler = document.querySelector(".navbar-toggler");
+      navbarToggler.click();
+    }
+  }
+});
