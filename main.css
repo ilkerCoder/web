@@ -31,7 +31,6 @@ ul.navbar-nav {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-left: 29%;
 }
 
 ul.navbar-nav li {
@@ -116,7 +115,7 @@ ul.navbar-nav li:hover {
     margin-left: 0;
   }
   ul.navbar-nav li {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 
   .navbar-nav {
