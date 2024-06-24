@@ -19,7 +19,8 @@ body {
   align-items: center;
   flex-grow: 1;
   width: 100%;
-  padding-top: 60px; /* Navbar yüksekliği kadar boşluk bırak */
+  height: 350px;
+  margin-top: 1%; /* Navbar yüksekliği kadar boşluk bırak */
 }
 
 .navbar-collapse {
@@ -92,6 +93,7 @@ ul.navbar-nav li:hover {
     box-shadow 0.3s ease;
   background-color: #dc0a0a;
 }
+
 .navbar-toggler:active {
   transform: scale(0.7);
 }
@@ -101,13 +103,15 @@ ul.navbar-nav li:hover {
 }
 
 @media (max-width: 991.98px) {
+  #drag-container {
+    margin-top: 23% !important;
+  }
   .navbar-collapse {
     text-align: center;
     margin-left: 0;
   }
   ul.navbar-nav li {
     border-bottom: 2px solid black;
-    animation: soldanSaga, 2 ease;
   }
 
   .navbar-nav {
@@ -119,47 +123,69 @@ ul.navbar-nav li:hover {
     display: block;
     margin-bottom: 10px;
     margin-right: 0;
+    transform: translateX(-100%);
+    animation: slideIn 0.5s forwards;
   }
 
-  .navbar-nav .nav-link {
-    padding: 0.5rem 0;
-    margin-right: 0;
+  .navbar-nav .nav-item:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  .navbar-nav .nav-item:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .navbar-nav .nav-item:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  .navbar-nav .nav-item:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+
+  .navbar-nav .nav-item:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+
+  .navbar-nav .nav-item:nth-child(6) {
+    animation-delay: 0.6s;
   }
 
   .collapse:not(.show) {
-    display: none !important; /* Navbar kapandığında gizli tut */
+    display: none !important;
   }
 
   .collapse.show {
-    display: block; /* Navbar açıldığında görünür yap */
+    display: block;
     position: absolute;
     width: 100%;
-    z-index: 999; /* İçeriklerin üstünde olacak şekilde ayarla */
+    z-index: 999;
     top: 100%;
-    backdrop-filter: blur(10px); /* Bulanıklık efekti */
+
     left: 0;
     background-color: rgba(59, 52, 52, 0.3);
-    animation: fadeInDown 1.5s ease; /* Animasyon ekle */
-  }
-}
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px); /* Yukarıdan gelsin */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0); /* Yerine otursun */
+    animation: fadeInDown 0.5s ease;
   }
 }
 
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateX(-100px); /* Yukarıdan gelsin */
+    transform: translateY(-20px);
   }
   to {
     opacity: 1;
-    transform: translateX(0); /* Yerine otursun */
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
