@@ -115,7 +115,7 @@ ul.navbar-nav li:hover {
     margin-left: 0;
   }
   ul.navbar-nav li {
-    border-bottom: 2px solid black;
+    font-size: 4rem;
   }
 
   .navbar-nav {

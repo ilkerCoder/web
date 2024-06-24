@@ -8,6 +8,9 @@ function create3DSlider(container) {
         <img src="resimler/kebap.jpg" alt="">
         <img src="resimler/lahmacun.jpg" alt="">
         <img src="resimler/tatli.jpg" alt="">
+        <img src="resimler/tatli.jpg" alt="">
+        <img src="resimler/tatli.jpg" alt="">
+        <img src="resimler/tatli.jpg" alt="">
       </div>
       <img src="./logo-beyaz.png" class="yer" alt="bünyamin_pide_logo">
       <div id="ground"></div>
@@ -19,7 +22,29 @@ function create3DSlider(container) {
   var rotateSpeed = -60; // unit: seconds/360 degrees
   var imgWidth = 120; // width of images (unit: px)
   var imgHeight = 170; // height of images (unit: px)
+  //KUCUK EKRANLAR İCİN RADİUS DEGERİ
+  function setRadiusForSmallScreens() {
+    var screenWidth = window.innerWidth;
+    if (screenWidth < 992) {
+      radius = 600; // Küçük ekranlar için daha küçük bir radius değeri
+    } else {
+      radius = 400; // Büyük ekranlar için varsayılan değer
+    }
+  }
 
+  // Sayfa yüklendiğinde ve pencere boyutu değiştiğinde radius değerini güncelle
+  function initSlider() {
+    setRadiusForSmallScreens(); // İlk başlangıç için ayarla
+
+    window.addEventListener("resize", function () {
+      setRadiusForSmallScreens(); // Pencere boyutu değiştiğinde güncelle
+      init(1); // Slider'ı yeniden başlat
+    });
+
+    init(1); // Slider'ı başlat
+  }
+
+  setTimeout(initSlider, 1000);
   setTimeout(init, 1000);
 
   var odrag = document.getElementById("drag-container");
