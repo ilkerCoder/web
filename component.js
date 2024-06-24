@@ -17,18 +17,18 @@ function create3DSlider(container) {
     </div>
   `;
 
-  var radius = 400; // how big of the radius
+  var radius = 490; // how big of the radius
   var autoRotate = true; // auto rotate or not
   var rotateSpeed = -60; // unit: seconds/360 degrees
-  var imgWidth = 120; // width of images (unit: px)
-  var imgHeight = 170; // height of images (unit: px)
+  var imgWidth = 340; // width of images (unit: px)
+  var imgHeight = 200; // height of images (unit: px)
   //KUCUK EKRANLAR İCİN RADİUS DEGERİ
   function setRadiusForSmallScreens() {
     var screenWidth = window.innerWidth;
     if (screenWidth < 992) {
       radius = 600; // Küçük ekranlar için daha küçük bir radius değeri
     } else {
-      radius = 400; // Büyük ekranlar için varsayılan değer
+      radius = 600; // Büyük ekranlar için varsayılan değer
     }
   }
 
