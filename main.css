@@ -1,0 +1,119 @@
+/* main.css */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  background-image: url("./background2.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+.navbar {
+  width: 100%;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1; /* İçeriği ortalamak için kullanılacak */
+}
+
+.navbar-collapse {
+  margin-left: 42%;
+}
+
+ul.navbar-nav li {
+  margin-right: 2% !important;
+  transition: transform 0.3s ease, opacity 0.3s ease, border 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+ul.navbar-nav li:hover {
+  opacity: 0.7;
+  border: 2px solid grey;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background-color: #dc0a0a;
+}
+
+/* NAVBAR RESİM VE DONME VS */
+.navbar-brand img {
+  height: 10vh !important;
+  animation: rotateLogo 15s infinite linear;
+  transition: transform 0.3s ease;
+}
+.navbar-brand:hover img {
+  transform: scale(1.5) rotate(360deg);
+  animation-play-state: paused;
+}
+@keyframes rotateLogo {
+  from {
+    transform: rotateY(0deg); /* Başlangıç açısı */
+  }
+  to {
+    transform: rotateY(360deg); /* Bitiş açısı */
+  }
+}
+.navbar-brand {
+  margin-left: 5%;
+}
+.navbar {
+  background-color: transparent !important;
+  backdrop-filter: blur(10px);
+  background-color: #111; /* Navbar arka plan rengi */
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.navbar-nav .nav-link {
+  color: #fff !important;
+}
+.navbar-brand .logo {
+  border-radius: 50%;
+  width: 100px;
+  height: 70px;
+  object-fit: cover;
+}
+.logo {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 10%;
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* NAVBAR RESİM DONME VS. */
+/* RESPONSİVE */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    text-align: center;
+    margin-left: 0px;
+  }
+
+  .navbar-nav {
+    display: block;
+    text-align: center;
+  }
+
+  .navbar-nav .nav-item {
+    display: block;
+    margin-bottom: 10px;
+    margin-right: 0; /* İstediğiniz boşluk miktarı */
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.5rem 0;
+    margin-right: 0; /* İstediğiniz padding miktarı */
+  }
+}
+/* /RESPONSİVE */
