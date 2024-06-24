@@ -166,6 +166,9 @@ ul.navbar-nav li:hover {
     background-color: rgba(59, 52, 52, 0.3);
     animation: fadeInDown 0.5s ease;
   }
+  .navbar-toggler-icon {
+    font-size: 2.7em;
+  }
 }
 
 @keyframes fadeInDown {
