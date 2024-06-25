@@ -2,7 +2,6 @@
 body {
   display: flex;
   flex-direction: column;
-
   background-image: url("./background2.jpeg");
   background-size: cover;
   background-position: center;
@@ -24,6 +23,7 @@ ul.navbar-nav li {
   margin-right: 2%;
   transition: transform 0.3s ease, opacity 0.3s ease, border 0.3s ease,
     box-shadow 0.3s ease;
+  text-align: center;
 }
 
 ul.navbar-nav li:hover {
@@ -91,16 +91,12 @@ ul.navbar-nav li:hover {
 
 @media (max-width: 991.98px) {
   .navbar-collapse {
-    text-align: center;
     margin-left: 0;
   }
   ul.navbar-nav li {
     font-size: 3rem;
-  }
-
-  .navbar-nav {
-    display: block;
-    text-align: center;
+    margin-left: 37%;
+    text-align: left;
   }
 
   .navbar-nav .nav-item {
