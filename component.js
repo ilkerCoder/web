@@ -1,170 +1,141 @@
-function create3DSlider(container) {
-  container.innerHTML = `
-    <div id="drag-container">
-      <div id="spin-container">
-        <img src="resimler/pide.jpg" alt="">
-        <img src="resimler/doner.jpg" alt="">
-        <img src="resimler/izgara.jpg" alt="">
-        <img src="resimler/kebap.jpg" alt="">
-        <img src="resimler/lahmacun.jpg" alt="">
-        <img src="resimler/tatli.jpg" alt="">
-        <img src="resimler/tatli.jpg" alt="">
-        <img src="resimler/tatli.jpg" alt="">
-        <img src="resimler/tatli.jpg" alt="">
-      </div>
-      <img src="./logo-beyaz.png" class="yer" alt="bünyamin_pide_logo">
-      <div id="ground"></div>
-    </div>
-  `;
+var radius = 490; // how big of the radius
+var autoRotate = true; // auto rotate or not
+var rotateSpeed = -60; // unit: seconds/360 degrees
+var imgWidth = 340; // width of images (unit: px)
+var imgHeight = 200; // height of images (unit: px)
 
-  var radius = 490; // how big of the radius
-  var autoRotate = true; // auto rotate or not
-  var rotateSpeed = -60; // unit: seconds/360 degrees
-  var imgWidth = 340; // width of images (unit: px)
-  var imgHeight = 200; // height of images (unit: px)
-  //KUCUK EKRANLAR İCİN RADİUS DEGERİ
-  function setRadiusForSmallScreens() {
-    var screenWidth = window.innerWidth;
-    if (screenWidth < 992) {
-      radius = 600; // Küçük ekranlar için daha küçük bir radius değeri
-    } else {
-      radius = 600; // Büyük ekranlar için varsayılan değer
-    }
+function setRadiusForSmallScreens() {
+  var screenWidth = window.innerWidth;
+  if (screenWidth < 992) {
+    radius = 600; // Küçük ekranlar için daha küçük bir radius değeri
+  } else {
+    radius = 600; // Büyük ekranlar için varsayılan değer
   }
+}
 
-  // Sayfa yüklendiğinde ve pencere boyutu değiştiğinde radius değerini güncelle
-  function initSlider() {
-    setRadiusForSmallScreens(); // İlk başlangıç için ayarla
+function initSlider() {
+  setRadiusForSmallScreens(); // İlk başlangıç için ayarla
 
-    window.addEventListener("resize", function () {
-      setRadiusForSmallScreens(); // Pencere boyutu değiştiğinde güncelle
-      init(1); // Slider'ı yeniden başlat
-    });
+  window.addEventListener("resize", function () {
+    setRadiusForSmallScreens(); // Pencere boyutu değiştiğinde güncelle
+    init(1); // Slider'ı yeniden başlat
+  });
 
-    init(1); // Slider'ı başlat
+  init(1); // Slider'ı başlat
+}
+
+setTimeout(initSlider, 1000);
+
+var odrag = document.getElementById("drag-container");
+var ospin = document.getElementById("spin-container");
+var aImg = ospin.getElementsByTagName("img");
+var aVid = ospin.getElementsByTagName("video");
+var aEle = [...aImg, ...aVid]; // combine 2 arrays
+
+ospin.style.width = imgWidth + "px";
+ospin.style.height = imgHeight + "px";
+
+var ground = document.getElementById("ground");
+ground.style.width = radius * 3 + "px";
+ground.style.height = radius * 3 + "px";
+
+function init(delayTime) {
+  for (var i = 0; i < aEle.length; i++) {
+    aEle[i].style.transform =
+      "rotateY(" +
+      i * (360 / aEle.length) +
+      "deg) translateZ(" +
+      radius +
+      "px)";
+    aEle[i].style.transition = "transform 1s";
+    aEle[i].style.transitionDelay = delayTime || (aEle.length - i) / 4 + "s";
   }
+  updateCaption();
+}
 
-  setTimeout(initSlider, 1000);
-  setTimeout(init, 1000);
+function applyTranform(obj) {
+  if (tY > 180) tY = 180;
+  if (tY < 0) tY = 0;
 
-  var odrag = document.getElementById("drag-container");
-  var ospin = document.getElementById("spin-container");
-  var aImg = ospin.getElementsByTagName("img");
-  var aVid = ospin.getElementsByTagName("video");
-  var aEle = [...aImg, ...aVid]; // combine 2 arrays
+  obj.style.transform = "rotateX(" + -tY + "deg) rotateY(" + tX + "deg)";
+}
 
-  // Size of images
-  ospin.style.width = imgWidth + "px";
-  ospin.style.height = imgHeight + "px";
+function playSpin(yes) {
+  ospin.style.animationPlayState = yes ? "running" : "paused";
+}
 
-  // Size of ground - depend on radius
-  var ground = document.getElementById("ground");
-  ground.style.width = radius * 3 + "px";
-  ground.style.height = radius * 3 + "px";
+var sX,
+  sY,
+  nX,
+  nY,
+  desX = 0,
+  desY = 0,
+  tX = 0,
+  tY = 10;
 
-  function init(delayTime) {
-    for (var i = 0; i < aEle.length; i++) {
-      aEle[i].style.transform =
-        "rotateY(" +
-        i * (360 / aEle.length) +
-        "deg) translateZ(" +
-        radius +
-        "px)";
-      aEle[i].style.transition = "transform 1s";
-      aEle[i].style.transitionDelay = delayTime || (aEle.length - i) / 4 + "s";
-    }
-  }
+if (autoRotate) {
+  var animationName = rotateSpeed > 0 ? "spin" : "spinRevert";
+  ospin.style.animation = `${animationName} ${Math.abs(
+    rotateSpeed
+  )}s infinite linear`;
+}
 
-  function applyTranform(obj) {
-    // Constrain the angle of camera (between 0 and 180)
-    if (tY > 180) tY = 180;
-    if (tY < 0) tY = 0;
+document.onpointerdown = function (e) {
+  clearInterval(odrag.timer);
+  e = e || window.event;
+  var sX = e.clientX,
+    sY = e.clientY;
 
-    // Apply the angle
-    obj.style.transform = "rotateX(" + -tY + "deg) rotateY(" + tX + "deg)";
-  }
-
-  function playSpin(yes) {
-    ospin.style.animationPlayState = yes ? "running" : "paused";
-  }
-
-  var sX,
-    sY,
-    nX,
-    nY,
-    desX = 0,
-    desY = 0,
-    tX = 0,
-    tY = 10;
-
-  // auto spin
-  if (autoRotate) {
-    var animationName = rotateSpeed > 0 ? "spin" : "spinRevert";
-    ospin.style.animation = `${animationName} ${Math.abs(
-      rotateSpeed
-    )}s infinite linear`;
-  }
-
-  // setup events
-  document.onpointerdown = function (e) {
-    clearInterval(odrag.timer);
+  this.onpointermove = function (e) {
     e = e || window.event;
-    var sX = e.clientX,
-      sY = e.clientY;
+    var nX = e.clientX,
+      nY = e.clientY;
+    desX = nX - sX;
+    desY = nY - sY;
+    tX += desX * 0.1;
+    tY += desY * 0.1;
+    applyTranform(odrag);
+    sX = nX;
+    sY = nY;
+  };
 
-    this.onpointermove = function (e) {
-      e = e || window.event;
-      var nX = e.clientX,
-        nY = e.clientY;
-      desX = nX - sX;
-      desY = nY - sY;
+  this.onpointerup = function (e) {
+    odrag.timer = setInterval(function () {
+      desX *= 0.95;
+      desY *= 0.95;
       tX += desX * 0.1;
       tY += desY * 0.1;
       applyTranform(odrag);
-      sX = nX;
-      sY = nY;
-    };
-
-    this.onpointerup = function (e) {
-      odrag.timer = setInterval(function () {
-        desX *= 0.95;
-        desY *= 0.95;
-        tX += desX * 0.1;
-        tY += desY * 0.1;
-        applyTranform(odrag);
-        playSpin(false);
-        if (Math.abs(desX) < 0.5 && Math.abs(desY) < 0.5) {
-          clearInterval(odrag.timer);
-          playSpin(true);
-        }
-      }, 17);
-      this.onpointermove = this.onpointerup = null;
-    };
-
-    return false;
+      playSpin(false);
+      if (Math.abs(desX) < 0.5 && Math.abs(desY) < 0.5) {
+        clearInterval(odrag.timer);
+        playSpin(true);
+        updateCaption();
+      }
+    }, 17);
+    this.onpointermove = this.onpointerup = null;
   };
 
-  document.onmousewheel = function (e) {
-    e = e || window.event;
-    var d = e.wheelDelta / 10 || -e.detail;
-    radius += d;
-    imgWidth += d;
-    imgHeight += d;
-    init(1);
-  };
+  return false;
+};
+
+document.onmousewheel = function (e) {
+  e = e || window.event;
+  var d = e.wheelDelta / 10 || -e.detail;
+  radius += d;
+  imgWidth += d;
+  imgHeight += d;
+  init(1);
+};
+
+function updateCaption() {
+  var currentIndex = Math.round(tX / (360 / aEle.length)) % aEle.length;
+  if (currentIndex < 0) currentIndex += aEle.length;
+  var currentImg = aEle[currentIndex];
+  var caption = document.querySelector(".caption");
+  caption.textContent = currentImg.alt;
 }
-// Navbar harici bir yere tıklanırsa toggle kapansın
-document.addEventListener("click", function (event) {
-  var target = event.target;
 
-  if (
-    !target.closest(".navbar-collapse") &&
-    !target.closest(".navbar-toggler")
-  ) {
-    var navbarCollapse = document.querySelector(".navbar-collapse");
-    if (navbarCollapse.classList.contains("show")) {
-      var navbarToggler = document.querySelector(".navbar-toggler");
-      navbarToggler.click();
-    }
-  }
-});
+setInterval(updateCaption, 1000); // Caption güncellemesini her saniye çağır
+
+// Slider'ı oluştur

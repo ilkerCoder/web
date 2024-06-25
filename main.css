@@ -12,7 +12,13 @@ body {
   background-repeat: no-repeat;
   background-color: transparent;
 }
-
+.caption {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  background-color: #dc0a0a;
+  z-index: 9999;
+}
 #app {
   display: flex;
   justify-content: center;
