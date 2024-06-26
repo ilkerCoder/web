@@ -22,6 +22,7 @@ body {
   transform: perspective(500vw) rotateX(-16deg) rotateY(200deg);
   animation: autoRun 20s linear infinite;
   z-index: 2;
+  cursor: move;
 }
 @keyframes autoRun {
   from {
