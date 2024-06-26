@@ -187,6 +187,9 @@ ul.navbar-nav li:hover:not(.ust) {
 }
 
 @media (max-width: 991.98px) {
+  .desc {
+    bottom: 17%;
+  }
   .navbar-nav {
     margin-left: 0 !important;
   }
