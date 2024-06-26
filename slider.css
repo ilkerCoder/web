@@ -1,6 +1,8 @@
 body {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
 .banner {
   width: 100%;
@@ -9,11 +11,12 @@ body {
   position: relative;
   display: flex;
 }
+
 .banner .slider {
   position: absolute;
   width: 10%;
   height: 20%;
-  top: 20%;
+  top: 10%;
   left: 46%; /* Start from the center horizontally */
   transform-style: preserve-3d;
   transform: perspective(50vw);
@@ -50,7 +53,7 @@ body {
     height: 11%;
     left: 42%; /* Start from the center horizontally */
 
-    top: 30%;
+    top: 20%;
   }
   .banner .slider .item {
     position: absolute;

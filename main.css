@@ -8,11 +8,62 @@ body {
   background-repeat: no-repeat;
   background-color: transparent;
 }
+.social .col {
+  transition: transform 0.3s ease, opacity 0.3s ease, border 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.social .col:hover {
+  border: 2px solid grey;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background-color: #faa634;
+  color: white !important;
+  background-color: #faa634;
+  text-align: center;
+}
+/* SLOGAN */
+.container {
+  width: 100%;
+  margin-top: 2.4%;
+}
 
+span {
+  font-size: larger;
+  font-weight: 900;
+  height: 300px;
+  width: 100%;
+  background-image: url("https://dl.dropbox.com/s/r2s8s2r17wi0xm6/flame.png?dl=0");
+  background-position: 0 -1000px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fire 2.9s linear infinite;
+}
+
+.slogan_h3 {
+  color: #fff;
+
+  text-align: center;
+}
+
+@keyframes fire {
+  0% {
+    background-position: 0% -50%;
+  }
+  100% {
+    background-position: 0% -25%;
+  }
+}
+/* /SLOGAN */
+
+.social {
+  margin-top: 5px !important;
+}
 .navbar-collapse {
   justify-content: center; /* Ortalamak için */
 }
-
+.navbar-nav {
+  margin-left: 10%;
+}
 ul.navbar-nav {
   display: flex;
   justify-content: center;
@@ -24,14 +75,14 @@ ul.navbar-nav li {
   transition: transform 0.3s ease, opacity 0.3s ease, border 0.3s ease,
     box-shadow 0.3s ease;
   text-align: center;
+  color: #faa634 !important;
 }
 
 ul.navbar-nav li:hover {
-  opacity: 0.7;
   border: 2px solid grey;
   transform: scale(1.1);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  background-color: #dc0a0a;
+  background-color: #faa634;
 }
 
 .navbar-brand img {
@@ -65,7 +116,6 @@ ul.navbar-nav li:hover {
   padding: 0 20px;
   width: 100%;
   z-index: 10000;
-  position: fixed;
   top: 0;
 }
 
@@ -78,7 +128,7 @@ ul.navbar-nav li:hover {
   transform: scale(1.2);
   transition: transform 0.3s ease, opacity 0.3s ease, border 0.3s ease,
     box-shadow 0.3s ease;
-  background-color: #dc0a0a;
+  background-color: #faa634 !important;
 }
 
 .navbar-toggler:active {
@@ -90,12 +140,26 @@ ul.navbar-nav li:hover {
 }
 
 @media (max-width: 991.98px) {
+  .ust {
+    top: 0 !important;
+    left: 30% !important;
+    font-size: 1.1rem;
+  }
+  .ust .fa-phone {
+    text-align: center;
+  }
+  .container {
+    margin-top: 18% !important;
+  }
+  .slogan_h3 {
+    font-size: 3rem;
+  }
   .navbar-collapse {
     margin-left: 0;
   }
   ul.navbar-nav li {
     font-size: 3rem;
-    margin-left: 37%;
+    padding-left: 37%;
     text-align: left;
   }
 

@@ -1,0 +1,2 @@
+kahverengi = 594941
+siyah = 0E0E0E
