@@ -143,10 +143,11 @@ ul.navbar-nav li:hover:not(.ust) {
 
 @media (max-width: 991.98px) {
   .ust {
-    top: 0 !important;
-    left: 24% !important;
-    font-size: 1.1rem;
+    top: 3.5% !important;
+    left: 35% !important;
+    font-size: 1.5rem;
   }
+
   .ust .fa-phone {
     text-align: center;
   }
