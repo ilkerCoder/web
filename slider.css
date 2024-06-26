@@ -21,17 +21,8 @@ body {
   transform-style: preserve-3d;
   transform: perspective(500vw) rotateX(-16deg) rotateY(200deg);
 
-  /* animation: autoRun 4s linear infinite; */
   z-index: 2;
   cursor: move;
-}
-@keyframes autoRun {
-  from {
-    transform: perspective(50vw) rotateX(-12deg) rotateY(200deg);
-  }
-  to {
-    transform: perspective(50vw) rotateX(-16deg) rotateY(200deg);
-  }
 }
 
 .banner .slider .item {
@@ -56,9 +47,9 @@ body {
 
 @media screen and (max-width: 1023px) {
   .banner .slider {
-    width: 20%;
-    height: 11%;
-    left: 42%; /* Start from the center horizontally */
+    width: 30%;
+    height: 15%;
+    left: 36%; /* Start from the center horizontally */
 
     top: 20%;
   }
@@ -68,16 +59,7 @@ body {
     transform: rotateY(
         calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)
       )
-      translateZ(27vw);
-  }
-
-  @keyframes autoRun {
-    from {
-      transform: perspective(50vw) rotateX(-22deg) rotateY(0deg);
-    }
-    to {
-      transform: perspective(50vw) rotateX(-22deg) rotateY(360deg);
-    }
+      translateZ(45vw);
   }
 }
 /*
