@@ -9,7 +9,7 @@ const updateRotationAndAnimate = (clientX) => {
   const mouseX = clientX - bannerRect.left;
 
   // Calculate the new rotateY value based on position
-  const rotateY = (mouseX / bannerWidth) * 20;
+  const rotateY = (mouseX / bannerWidth) * 5;
   currentRotateY = rotateY;
 
   // Stop the animation

@@ -147,7 +147,11 @@ ul.navbar-nav li:hover:not(.ust) {
     left: 35% !important;
     font-size: 1.5rem;
   }
-
+  .con {
+    margin-left: 0 !important;
+    width: 100% !important;
+    height: 57%;
+  }
   .ust .fa-phone {
     text-align: center;
   }
