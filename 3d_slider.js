@@ -1,14 +1,14 @@
-let currentRotateY = 0;
+let currentRotateY;
 
 const banner = document.querySelector(".slider");
-
 banner.addEventListener("mousemove", (e) => {
   const bannerRect = banner.getBoundingClientRect();
   const bannerWidth = bannerRect.width;
   const mouseX = e.clientX - bannerRect.left;
 
   // Calculate the new rotateY value based on mouse position
-  const rotateY = currentRotateY + (mouseX / bannerWidth) * 4;
+  const rotateY = (mouseX / bannerWidth) * 20;
+  currentRotateY = rotateY;
 
   // Stop the animation
   banner.style.animation = "none";
@@ -16,8 +16,7 @@ banner.addEventListener("mousemove", (e) => {
   // Apply the new transform property
   banner.style.transform = `perspective(50vw) rotateX(-16deg) rotateY(${rotateY}deg)`;
 
-  // Update currentRotateY for the next mouse movement
-  currentRotateY = rotateY;
+  // Update currentRotateY
 });
 
 banner.addEventListener("mouseleave", () => {
@@ -40,7 +39,6 @@ banner.addEventListener("mouseleave", () => {
 
   // Append the new keyframes to the document
   const styleSheet = document.createElement("style");
-  styleSheet.type = "text/css";
   styleSheet.innerText = newKeyframes;
   document.head.appendChild(styleSheet);
 
