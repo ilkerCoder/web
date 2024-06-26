@@ -3,6 +3,13 @@ let currentRotateX = -16;
 let startX = 0;
 let startY = 0;
 let isDragging = false;
+const navToggler = document.querySelector(".navbar-toggler");
+const container = document.querySelector(".container");
+
+navToggler.addEventListener("click", function () {
+  container.style.transition = "opacity 2s ease";
+  container.style.opacity = container.style.opacity === "0" ? "1" : "0";
+});
 
 let degerler = [
   "Döner",
