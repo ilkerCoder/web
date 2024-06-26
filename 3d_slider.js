@@ -1,64 +1,61 @@
 let currentRotateY = 0;
+let startX = 0;
+let isDragging = false;
 
 const banner = document.querySelector(".slider");
 
-// Function to update rotation and continue animation
-const updateRotationAndAnimate = (clientX) => {
-  const bannerRect = banner.getBoundingClientRect();
-  const bannerWidth = bannerRect.width;
-  const mouseX = clientX - bannerRect.left;
-
-  // Calculate the new rotateY value based on position
-  const rotateY = (mouseX / bannerWidth) * 5;
-  currentRotateY = rotateY;
-
-  // Stop the animation
-  banner.style.animation = "none";
-
-  // Apply the new transform property
-  banner.style.transform = `perspective(50vw) rotateX(-16deg) rotateY(${rotateY}deg)`;
-
-  // Create a new keyframes animation starting from the currentRotateY value
-  const newKeyframes = `
-    @keyframes autoRunFromCurrent {
-      from {
-        transform: perspective(50vw) rotateX(-16deg) rotateY(${rotateY}deg);
-      }
-      to {
-        transform: perspective(50vw) rotateX(-16deg) rotateY(${
-          rotateY + 360
-        }deg);
-      }
-    }
-  `;
-
-  // Append the new keyframes to the document
-  const styleSheet = document.createElement("style");
-  styleSheet.innerText = newKeyframes;
-  document.head.appendChild(styleSheet);
-
-  // Apply the new animation
-  banner.style.animation = "autoRunFromCurrent 20s linear infinite";
-};
-
-// Mouse events
+// Fare tıklama olayını dinleyin
 banner.addEventListener("mousedown", (e) => {
-  updateRotationAndAnimate(e.clientX);
+  startX = e.clientX;
+  isDragging = true;
+
+  // Animasyon döngüsünü durdurun
+  cancelAnimationFrame(animationLoop);
 });
 
-window.addEventListener("mousemove", (e) => {
-  if (e.buttons === 1) {
-    updateRotationAndAnimate(e.clientX);
+// Fare hareketi olayını dinleyin
+banner.addEventListener("mousemove", (e) => {
+  if (isDragging) {
+    const mouseX = e.clientX;
+    const sensitivity = 0.5; // Hareket hassasiyeti
+
+    // Hareket mesafesine göre rotateY değerini hesaplayın
+    const deltaX = (mouseX - startX) * sensitivity;
+    currentRotateY += deltaX;
+
+    // Şu anda uygulanan transform değerini alın
+    let transformValue = `perspective(500vw) rotateX(-16deg) rotateY(${currentRotateY}deg)`;
+
+    // Transform değerini uygulayın
+    banner.style.transform = transformValue;
+
+    // Başlangıç noktasını güncelleyin
+    startX = mouseX;
   }
 });
 
-// Touch events
-banner.addEventListener("touchstart", (e) => {
-  const touch = e.touches[0];
-  updateRotationAndAnimate(touch.clientX);
+// Fare bırakma olayını dinleyin
+banner.addEventListener("mouseup", () => {
+  isDragging = false;
+  console.log("mouse up oldu");
+  // Animasyon döngüsünü tekrar başlatın
+  animateRotateY();
 });
 
-window.addEventListener("touchmove", (e) => {
-  const touch = e.touches[0];
-  updateRotationAndAnimate(touch.clientX);
-});
+// Fare hareketi olayını izleme
+let animationLoop;
+function animateRotateY() {
+  currentRotateY += 1; // Her adımda rotateY değerini artırın
+
+  // Şu anda uygulanan transform değerini alın
+  let transformValue = `perspective(500vw) rotateX(-16deg) rotateY(${currentRotateY}deg)`;
+
+  // Transform değerini uygulayın
+  banner.style.transform = transformValue;
+
+  // Animasyon döngüsünü tekrar başlatın
+  animationLoop = requestAnimationFrame(animateRotateY);
+}
+
+// Animasyonu başlatın
+animateRotateY();
